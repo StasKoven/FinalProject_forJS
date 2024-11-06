@@ -1,42 +1,32 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* src/styles/App.css */
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #121212;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.content {
+  flex: 1;
+  padding: 20px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navbar, .sidebar {
+  background-color: #1E1E1E;
+  padding: 10px 15px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.navbar h1, .sidebar h2 {
+  color: #FFFFFF;
+  font-size: 1.5rem;
 }
 
-.card {
-  padding: 2em;
+.navbar a, .sidebar a {
+  display: block;
+  color: #AAAAAA;
+  padding: 8px 0;
 }
 
-.read-the-docs {
-  color: #888;
+.navbar a:hover, .sidebar a:hover {
+  color: #BB86FC;
 }
