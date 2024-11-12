@@ -13,7 +13,6 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <Navbar /> {/* Чорний хедер тут */}
       <div className="dashboard-content">
         <Sidebar />
         <main className="dashboard-main">
