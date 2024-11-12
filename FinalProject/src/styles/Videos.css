@@ -1,0 +1,38 @@
+.videos-container {
+    padding: 20px;
+    background-color: #f5f5f5;
+  }
+  
+  .videos-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333333;
+  }
+  
+  .videos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .video-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .video-card img.thumbnail {
+    width: 100%;
+    height: auto;
+  }
+  
+  .video-card h3 {
+    padding: 10px;
+    font-size: 1.1rem;
+    color: #000000;
+  }
+  
