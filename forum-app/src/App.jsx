@@ -5,7 +5,8 @@ import AddPostPage from "./pages/AddPostPage";
 import LoginPage from "./pages/LoginPage";
 import QuestionDetailPage from "./pages/QuestionDetailPage";
 import EditPostPage from "./pages/EditPostPage";
-
+import RegistrationPage from "./pages/RegistrationPage";
+import CoursesPage from "./pages/CoursesPage";
 
 function App() {
   return (
@@ -16,9 +17,9 @@ function App() {
             <a href="/">Forum</a>
             <div>
               <a href="/login">Login</a>
-              <a href="/forum/new" className="ml-4">
-                Add Post
-              </a>
+              <a href="/register" className="ml-4">Register</a>
+              <a href="/forum/new" className="ml-4">Add Post</a>
+              <a href="/courses" className="ml-4">Course</a>
             </div>
           </nav>
         </header>
@@ -26,10 +27,12 @@ function App() {
           <Routes>
             <Route path="/" element={<ForumPage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegistrationPage />} />
             <Route path="/forum/new" element={<AddPostPage />} />
             <Route path="/question/:id" element={<QuestionDetailPage />} />
             <Route path="/add-post" element={<AddPostPage />} />
             <Route path="/edit-post/:id" element={<EditPostPage />} />
+            <Route path="/courses" element={<CoursesPage />} />
           </Routes>
         </main>
         <footer>

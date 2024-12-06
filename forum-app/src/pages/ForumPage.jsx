@@ -7,7 +7,6 @@ function ForumPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Завантаження постів із localStorage
     const savedPosts = JSON.parse(localStorage.getItem("posts")) || [];
     setPosts(savedPosts);
   }, []);
@@ -23,16 +22,13 @@ function ForumPage() {
   };
 
   const handlePostClick = (id) => {
-    setActivePostId(id === activePostId ? null : id);
+    navigate(`/question/${id}`);
   };
 
   return (
     <div className="forum-container">
       <h1 className="forum-title">Forum for Programmers</h1>
-      <button
-        className="form-button"
-        onClick={() => navigate("/add-post")}
-      >
+      <button className="form-button" onClick={() => navigate("/add-post")}>
         Add New Post
       </button>
       <div className="posts-list">
@@ -45,23 +41,29 @@ function ForumPage() {
               className={`post-card ${
                 activePostId === post.id ? "post-card-active" : ""
               }`}
-              onClick={() => handlePostClick(post.id)}
             >
               <h2>{post.title}</h2>
               <p>{post.content}</p>
-              {activePostId === post.id && (
-                <div className="post-actions">
-                  <button onClick={() => editPost(post.id)} className="form-button">
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => deletePost(post.id)}
-                    className="form-button delete-button"
-                  >
-                    Delete
-                  </button>
-                </div>
-              )}
+              <button
+                className="form-button"
+                onClick={() => handlePostClick(post.id)}
+              >
+                Open
+              </button>
+              <div className="post-actions">
+                <button
+                  onClick={() => editPost(post.id)}
+                  className="form-button"
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => deletePost(post.id)}
+                  className="form-button delete-button"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))
         )}

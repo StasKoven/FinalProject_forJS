@@ -217,3 +217,140 @@ footer {
 .delete-button:hover {
   background-color: #ff7875;
 }
+
+.textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background-color: var(--background);
+  resize: vertical;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background-color: var(--background);
+}
+
+.textarea:focus,
+.input:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+.mt-6 {
+  margin-top: 1.5rem;
+}
+
+/* Кнопки при наведенні */
+.group:hover .group-hover\\:flex {
+  display: flex !important;
+}
+
+.card {
+  position: relative;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+}
+
+.group-hover\\:flex {
+  display: none;
+}
+
+.edit-button,
+.delete-button {
+  background: #edf2f7;
+  color: #1a202c;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.edit-button:hover {
+  background: #4299e1;
+  color: #fff;
+}
+
+.delete-button:hover {
+  background: #e53e3e;
+  color: #fff;
+}
+
+.cancel-button {
+  background: #edf2f7;
+  color: #1a202c;
+}
+
+.cancel-button:hover {
+  background: #a0aec0;
+  color: #fff;
+}
+
+.form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.input,
+.select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+}
+
+.form-button {
+  padding: 0.5rem 1rem;
+  background-color: #4299e1;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-button:hover {
+  background-color: #3182ce;
+}
+
+.error {
+  color: #e53e3e;
+  margin-bottom: 1rem;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.video-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.video-card h2 {
+  font-size: 1.25rem;
+  margin: 0.5rem 0;
+}
+
+.video-card p {
+  font-size: 0.875rem;
+  color: #4a5568;
+}
