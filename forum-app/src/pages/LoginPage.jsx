@@ -1,45 +1,62 @@
-import React, { useState } from 'react';
-
-const mockUsers = [
-  { username: 'admin', password: 'admin123', role: 'admin' },
-  { username: 'user', password: 'user123', role: 'user' }
-];
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [formData, setFormData] = useState({ username: "", password: "" });
+  const navigate = useNavigate();
 
-  const handleLogin = () => {
-    const user = mockUsers.find(
-      (u) => u.username === username && u.password === password
-    );
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-    if (user) {
-      localStorage.setItem('user', JSON.stringify(user));
-      window.location.href = '/forum';
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (formData.username && formData.password) {
+      console.log("Logged in as:", formData.username);
+      navigate("/");
     } else {
-      setError('Invalid username or password');
+      alert("Please fill in all fields");
     }
   };
 
   return (
-    <div className="login-page">
-      <h1>Login</h1>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={handleLogin}>Login</button>
+    <div className="form-container">
+      <h1 className="form-title">Login to Forum</h1>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={formData.username}
+            onChange={handleInputChange}
+            placeholder="Enter your username"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleInputChange}
+            placeholder="Enter your password"
+          />
+        </div>
+        <button type="submit" className="form-button">
+          Login
+        </button>
+      </form>
+      <p className="text-center">
+        Don't have an account?{" "}
+        <span className="text-link" onClick={() => navigate("/register")}>
+          Register here
+        </span>
+      </p>
     </div>
   );
 }
