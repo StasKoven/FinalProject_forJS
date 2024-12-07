@@ -12,19 +12,32 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif;
   margin: 0;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  font-family: 'Inter', sans-serif;
   background: var(--background);
   color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 a {
   color: var(--primary);
   text-decoration: none;
   font-weight: 600;
+}
+
+.main {
+  flex: 1; /* Вільне розтягнення основного контенту */
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
 }
 
 a:hover {
@@ -43,7 +56,7 @@ header {
 
 header .navbar {
   display: flex;
-  justify-content: space-between; /* Простір між елементами */
+  justify-content: space-between;
   align-items: center;
   max-width: 1280px;
   margin: 0 auto;
@@ -52,7 +65,7 @@ header .navbar {
 
 header nav {
   display: flex;
-  gap: 1.5rem; /* Відстань між кнопками */
+  gap: 1.5rem;
   align-items: center;
 }
 
@@ -61,18 +74,18 @@ header nav a {
   text-decoration: none;
   font-size: 1rem;
   font-weight: 600;
-  padding: 0.5rem 1rem; /* Внутрішній відступ для кнопок */
-  border-radius: 4px; /* Злегка закруглені кути */
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 header nav a:hover {
-  background-color: var(--primary); /* Червоний фон при наведенні */
+  background-color: var(--primary);
   color: var(--white);
 }
 
 header nav a.active {
-  background-color: #ff6347; /* Трохи світліший червоний для активної кнопки */
+  background-color: #ff6347;
   color: var(--white);
 }
 
@@ -85,10 +98,8 @@ footer {
 }
 
 .container {
-  max-width: 1400px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem 1rem;
-  flex: 1;
 }
 
 .card {
@@ -255,7 +266,8 @@ footer {
   resize: vertical;
 }
 
-.input {
+.input,
+.textarea {
   width: 100%;
   padding: 0.75rem;
   border: 1px solid #e2e8f0;
@@ -338,12 +350,18 @@ footer {
 }
 
 .form-button {
-  padding: 0.5rem 1rem;
-  background-color: #4299e1;
-  color: #fff;
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--white);
+  background-color: var(--primary);
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
 }
 
 .form-button:hover {

@@ -7,23 +7,24 @@ import QuestionDetailPage from "./pages/QuestionDetailPage";
 import EditPostPage from "./pages/EditPostPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import CoursesPage from "./pages/CoursesPage";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <Router>
-      <div className="flex flex-col min-h-screen">
-        <header>
-          <nav className="navbar">
-            <a href="/">Forum</a>
+      <div className="flex flex-col min-h-screen ">
+        <header className="bg-secondary text-white shadow-md">
+          <nav className="navbar flex justify-between items-center max-w-7xl mx-auto py-4 px-6">
+            <a href="/" className="text-lg font-bold">Forum</a>
             <div>
-              <a href="/login">Login</a>
-              <a href="/register" className="ml-4">Register</a>
-              <a href="/forum/new" className="ml-4">Add Post</a>
-              <a href="/courses" className="ml-4">Course</a>
+              <a href="/login" className="text-white hover:text-primary mx-2">Login</a>
+              <a href="/register" className="text-white hover:text-primary mx-2">Register</a>
+              <a href="/forum/new" className="text-white hover:text-primary mx-2">Add Post</a>
+              <a href="/courses" className="text-white hover:text-primary mx-2">Courses</a>
             </div>
           </nav>
         </header>
-        <main className="flex-grow">
+        <main className="flex-grow container mx-auto p-6">
           <Routes>
             <Route path="/" element={<ForumPage />} />
             <Route path="/login" element={<LoginPage />} />
@@ -35,9 +36,7 @@ function App() {
             <Route path="/courses" element={<CoursesPage />} />
           </Routes>
         </main>
-        <footer>
-          <p>&copy; 2024 Forum for Developers. All rights reserved.</p>
-        </footer>
+        <Footer />
       </div>
     </Router>
   );
