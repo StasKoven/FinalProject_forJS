@@ -12,7 +12,7 @@ import Footer from "./components/Footer";
 function App() {
   return (
     <Router>
-      <div className="flex flex-col min-h-screen ">
+      <div className="wrapper">
         <header className="bg-secondary text-white shadow-md">
           <nav className="navbar flex justify-between items-center max-w-7xl mx-auto py-4 px-6">
             <a href="/" className="text-lg font-bold">Forum</a>
@@ -24,7 +24,7 @@ function App() {
             </div>
           </nav>
         </header>
-        <main className="flex-grow container mx-auto p-6">
+        <main className="main container mx-auto p-6">
           <Routes>
             <Route path="/" element={<ForumPage />} />
             <Route path="/login" element={<LoginPage />} />
