@@ -18,15 +18,15 @@ function CoursesPage() {
       const response = await axios.get("https://www.googleapis.com/youtube/v3/playlistItems", {
         params: {
           part: "snippet",
-          maxResults: 10, // Кількість відео для завантаження
+          maxResults: 10,
           playlistId: YOUTUBE_PLAYLIST_ID,
           key: YOUTUBE_API_KEY,
-          pageToken, // Передаємо токен для наступної сторінки, якщо він є
+          pageToken,
         },
       });
 
       setVideos((prevVideos) => [...prevVideos, ...response.data.items]);
-      setNextPageToken(response.data.nextPageToken || null); // Зберігаємо токен наступної сторінки
+      setNextPageToken(response.data.nextPageToken || null);
     } catch (err) {
       setError("Failed to load videos. Please try again later.");
       console.error(err);
@@ -36,12 +36,12 @@ function CoursesPage() {
   };
 
   useEffect(() => {
-    fetchVideos(); // Завантажуємо першу сторінку відео
+    fetchVideos();
   }, []);
 
   const loadMoreVideos = () => {
     if (nextPageToken) {
-      fetchVideos(nextPageToken); // Завантажуємо наступну сторінку відео
+      fetchVideos(nextPageToken);
     }
   };
 
