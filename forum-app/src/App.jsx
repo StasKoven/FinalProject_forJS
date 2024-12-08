@@ -8,6 +8,7 @@ import EditPostPage from "./pages/EditPostPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import CoursesPage from "./pages/CoursesPage";
 import Footer from "./components/Footer";
+import ProgrammingToolsPage from "./pages/ProgrammingToolsPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
               <a href="/register" className="text-white hover:text-primary mx-2">Register</a>
               <a href="/forum/new" className="text-white hover:text-primary mx-2">Add Post</a>
               <a href="/courses" className="text-white hover:text-primary mx-2">Courses</a>
+              <a href="/programming-tools" className="text-white hover:text-primary mx-2">Programming Tools</a>
             </div>
           </nav>
         </header>
@@ -34,6 +36,7 @@ function App() {
             <Route path="/add-post" element={<AddPostPage />} />
             <Route path="/edit-post/:id" element={<EditPostPage />} />
             <Route path="/courses" element={<CoursesPage />} />
+            <Route path="/programming-tools" element={<ProgrammingToolsPage />} />
           </Routes>
         </main>
         <Footer />
