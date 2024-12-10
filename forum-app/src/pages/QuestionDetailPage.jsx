@@ -1,24 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 function QuestionDetailPage() {
   const { id } = useParams();
   const [question, setQuestion] = useState(null);
   const [answers, setAnswers] = useState([]);
-  const [newAnswer, setNewAnswer] = useState({ name: "", content: "" });
-  const [editingAnswer, setEditingAnswer] = useState(null);
+  const [newAnswer, setNewAnswer] = useState({ name: '', content: '' });
 
   useEffect(() => {
-    const mockQuestion = {
-      id,
-      title: "How to learn Python?",
-      content: "I want to learn Python but don't know where to start.",
-      author: "Alice",
-      date: "2023-12-01",
-    };
+    const savedPosts = JSON.parse(localStorage.getItem('posts')) || [];
+    const currentQuestion = savedPosts.find((post) => post.id === parseInt(id));
+    setQuestion(currentQuestion);
 
-    const savedAnswers = JSON.parse(localStorage.getItem(`answers_${id}`)) || [];
-    setQuestion(mockQuestion);
+    const savedAnswers =
+      JSON.parse(localStorage.getItem(`answers_${id}`)) || [];
     setAnswers(savedAnswers);
   }, [id]);
 
@@ -30,47 +25,18 @@ function QuestionDetailPage() {
   const handleAddAnswer = () => {
     if (!newAnswer.name.trim() || !newAnswer.content.trim()) return;
 
-    const newAnswers = [
+    const updatedAnswers = [
       ...answers,
       {
         id: Date.now(),
         content: newAnswer.content,
         author: newAnswer.name,
-        date: new Date().toISOString().split("T")[0],
+        date: new Date().toISOString().split('T')[0],
       },
     ];
 
-    setNewAnswer({ name: "", content: "" });
-    saveAnswersToLocalStorage(newAnswers);
-  };
-
-  const handleDeleteAnswer = (answerId) => {
-    const updatedAnswers = answers.filter((answer) => answer.id !== answerId);
+    setNewAnswer({ name: '', content: '' });
     saveAnswersToLocalStorage(updatedAnswers);
-  };
-
-  const handleEditAnswer = (answer) => {
-    setEditingAnswer(answer);
-    setNewAnswer({ name: answer.author, content: answer.content });
-  };
-
-  const handleSaveEdit = () => {
-    if (!newAnswer.name.trim() || !newAnswer.content.trim()) return;
-
-    const updatedAnswers = answers.map((answer) =>
-      answer.id === editingAnswer.id
-        ? { ...answer, content: newAnswer.content, author: newAnswer.name }
-        : answer
-    );
-
-    setEditingAnswer(null);
-    setNewAnswer({ name: "", content: "" });
-    saveAnswersToLocalStorage(updatedAnswers);
-  };
-
-  const cancelEdit = () => {
-    setEditingAnswer(null);
-    setNewAnswer({ name: "", content: "" });
   };
 
   if (!question) return <div>Loading...</div>;
@@ -90,36 +56,17 @@ function QuestionDetailPage() {
         <p>No answers yet. Be the first to reply!</p>
       ) : (
         answers.map((answer) => (
-          <div
-            key={answer.id}
-            className="card relative group"
-          >
+          <div key={answer.id} className="card">
             <p>{answer.content}</p>
             <div className="text-sm text-gray-500 mt-2">
               By {answer.author} on {answer.date}
-            </div>
-            <div className="absolute top-0 right-0 hidden group-hover:flex gap-2 p-2">
-              <button
-                onClick={() => handleEditAnswer(answer)}
-                className="form-button edit-button"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => handleDeleteAnswer(answer.id)}
-                className="form-button delete-button"
-              >
-                Delete
-              </button>
             </div>
           </div>
         ))
       )}
 
       <div className="form-container mt-6">
-        <h3 className="form-title">
-          {editingAnswer ? "Edit Your Answer" : "Add Your Answer"}
-        </h3>
+        <h3 className="form-title">Add Your Answer</h3>
         <div className="form-group">
           <label>Your Name</label>
           <input
@@ -143,20 +90,9 @@ function QuestionDetailPage() {
             className="textarea"
           />
         </div>
-        {editingAnswer ? (
-          <div className="form-actions">
-            <button className="form-button" onClick={handleSaveEdit}>
-              Save Changes
-            </button>
-            <button className="form-button cancel-button" onClick={cancelEdit}>
-              Cancel
-            </button>
-          </div>
-        ) : (
-          <button className="form-button" onClick={handleAddAnswer}>
-            Submit Answer
-          </button>
-        )}
+        <button className="form-button" onClick={handleAddAnswer}>
+          Submit Answer
+        </button>
       </div>
     </div>
   );
