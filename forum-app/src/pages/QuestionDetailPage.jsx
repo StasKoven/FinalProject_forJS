@@ -13,7 +13,7 @@ function QuestionDetailPage() {
       try {
         const data = await fetchProductById(id);
         setQuestion(data);
-        setAnswers([]); // Initialize with empty answers or fetch from a service
+        setAnswers([]);
       } catch (err) {
         console.error('Error loading question:', err);
       }
@@ -32,9 +32,9 @@ function QuestionDetailPage() {
   };
 
   return (
-    <div className="question-container">
+    <div className="forum-container">
       {question ? (
-        <div className="question-card">
+        <div className="post-card fade-in">
           <h1>{question.title}</h1>
           <p>{question.body}</p>
           <h2>Answers</h2>
@@ -50,11 +50,12 @@ function QuestionDetailPage() {
           )}
           <div className="answer-form">
             <textarea
+              className="textarea"
               value={newAnswer}
               onChange={(e) => setNewAnswer(e.target.value)}
               placeholder="Write your answer here..."
             />
-            <button className="form-button" onClick={handleAddAnswer}>
+            <button className="button button-primary" onClick={handleAddAnswer}>
               Submit Answer
             </button>
           </div>

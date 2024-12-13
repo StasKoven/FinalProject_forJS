@@ -23,34 +23,30 @@ function LoginPage() {
   };
 
   return (
-    <div className="form-container">
-      <h1 className="form-title">Login</h1>
-      <form onSubmit={handleLogin}>
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
+    <main className="main container mx-auto p-6">
+      <div className="form-container fade-in">
+        <h1 className="form-title">Login</h1>
+        <form onSubmit={handleLogin}>
           <input
+            className="input"
             type="text"
-            id="username"
+            placeholder="Username"
             value={credentials.username}
             onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
-            required
           />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
           <input
+            className="input"
             type="password"
-            id="password"
+            placeholder="Password"
             value={credentials.password}
             onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
-            required
           />
-        </div>
-        <button type="submit" className="form-button">
-          Login
-        </button>
-      </form>
-    </div>
+          <button type="submit" className="button button-primary">
+            Login
+          </button>
+        </form>
+      </div>
+    </main>
   );
 }
 

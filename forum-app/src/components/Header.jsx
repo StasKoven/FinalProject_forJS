@@ -3,31 +3,25 @@ import { NavLink } from 'react-router-dom';
 
 function Header() {
   return (
-    <header className="bg-secondary text-white p-4 shadow">
-      <div className="container flex justify-between items-center">
-        <h1 className="text-xl font-bold">Programmers' Forum</h1>
-        <nav className="flex gap-6">
+    <header className="navbar">
+      <div className="container">
+        <h1 className="navbar-brand">Programmers' Forum</h1>
+        <nav className="navbar-links">
           <NavLink
             to="/"
-            className={({ isActive }) =>
-              isActive ? 'active' : 'hover:bg-primary'
-            }
+            className={({ isActive }) => (isActive ? 'active' : '')}
           >
             Home
           </NavLink>
           <NavLink
             to="/forum"
-            className={({ isActive }) =>
-              isActive ? 'active' : 'hover:bg-primary'
-            }
+            className={({ isActive }) => (isActive ? 'active' : '')}
           >
             Forum
           </NavLink>
           <NavLink
             to="/courses"
-            className={({ isActive }) =>
-              isActive ? 'active' : 'hover:bg-primary'
-            }
+            className={({ isActive }) => (isActive ? 'active' : '')}
           >
             Courses
           </NavLink>

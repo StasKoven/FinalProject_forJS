@@ -2,14 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function Button({ label, onClick, variant = 'primary' }) {
-  const baseStyles = 'px-4 py-2 rounded text-white font-medium';
-  const variants = {
-    primary: 'bg-primary hover:bg-blue-700',
-    secondary: 'bg-secondary hover:bg-yellow-500',
-  };
+  const variantClass = variant === 'secondary' ? 'button-secondary' : 'button-primary';
 
   return (
-    <button className={`${baseStyles} ${variants[variant]}`} onClick={onClick}>
+    <button className={`button ${variantClass}`} onClick={onClick}>
       {label}
     </button>
   );

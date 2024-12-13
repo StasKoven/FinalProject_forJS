@@ -1,15 +1,22 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 function ForumPost({ title, content, author, date }) {
   return (
-    <div className="card">
-      <h2 className="text-xl font-semibold mb-2">{title}</h2>
-      <p className="text-gray-600 mb-4">{content}</p>
-      <div className="text-sm text-gray-500">
+    <div className="post-card">
+      <h2>{title}</h2>
+      <p>{content}</p>
+      <div className="text-small">
         By {author} on {date}
       </div>
     </div>
   );
 }
+ForumPost.propTypes = {
+  title: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+};
 
 export default ForumPost;

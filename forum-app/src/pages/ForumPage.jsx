@@ -34,30 +34,10 @@ function ForumPage() {
     }
   };
 
-  const handleEdit = async (id, updatedData) => {
-    try {
-      const updatedPost = await updateProduct(id, updatedData);
-      dispatch({ type: 'UPDATE_POST', payload: updatedPost });
-    } catch (err) {
-      console.error('Error updating post:', err);
-      setError('Failed to update post.');
-    }
-  };
-
-  const handleAdd = async (newPostData) => {
-    try {
-      const newPost = await createProduct(newPostData);
-      dispatch({ type: 'ADD_POST', payload: newPost });
-    } catch (err) {
-      console.error('Error adding post:', err);
-      setError('Failed to add post.');
-    }
-  };
-
   return (
     <div className="forum-container">
       <h1 className="forum-title">Forum for Programmers</h1>
-      <button className="form-button" onClick={() => navigate('/add-post')}>
+      <button className="button button-primary" onClick={() => navigate('/add-post')}>
         Add New Post
       </button>
       {loading ? (
@@ -67,27 +47,29 @@ function ForumPage() {
       ) : (
         <div className="posts-list">
           {state.posts.map((post) => (
-            <div key={post.id} className="post-card">
+            <div key={post.id} className="post-card fade-in">
               <h2>{post.title}</h2>
               <p>{post.body}</p>
-              <button
-                className="form-button"
-                onClick={() => navigate(`/question/${post.id}`)}
-              >
-                Open
-              </button>
-              <button
-                className="edit-button"
-                onClick={() => navigate(`/edit-post/${post.id}`)}
-              >
-                Edit
-              </button>
-              <button
-                className="delete-button"
-                onClick={() => handleDelete(post.id)}
-              >
-                Delete
-              </button>
+              <div className="button-group">
+                <button
+                  className="button button-primary"
+                  onClick={() => navigate(`/question/${post.id}`)}
+                >
+                  Open
+                </button>
+                <button
+                  className="button button-secondary"
+                  onClick={() => navigate(`/edit-post/${post.id}`)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="button button-delete"
+                  onClick={() => handleDelete(post.id)}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))}
         </div>
