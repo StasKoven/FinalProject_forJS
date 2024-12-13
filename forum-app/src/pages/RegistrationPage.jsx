@@ -1,14 +1,9 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { registerUser } from '../services/API';
 
 function RegistrationPage() {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    role: "user", // default role is "user"
-  });
-
+  const [formData, setFormData] = useState({ username: '', password: '', email: '', role: 'user' });
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -17,48 +12,25 @@ function RegistrationPage() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
 
-    if (!formData.username || !formData.email || !formData.password) {
-      setError("All fields are required!");
-      return;
+    try {
+      await registerUser(formData);
+      alert('Registration successful! Please log in.');
+      navigate('/login');
+    } catch (err) {
+      console.error('Registration error:', err);
+      setError('Registration failed. Please try again.');
     }
-
-    // Завантаження існуючих користувачів із localStorage
-    const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
-    const userExists = existingUsers.some(
-      (user) => user.email === formData.email
-    );
-
-    if (userExists) {
-      setError("A user with this email already exists.");
-      return;
-    }
-
-    // Додавання нового користувача
-    const newUser = {
-      id: Date.now(),
-      username: formData.username,
-      email: formData.email,
-      password: formData.password,
-      role: formData.role,
-    };
-
-    localStorage.setItem(
-      "users",
-      JSON.stringify([...existingUsers, newUser])
-    );
-
-    alert("Registration successful!");
-    navigate("/login");
   };
 
   return (
-    <div className="container">
-      <h1 className="text-2xl font-bold mb-4">Registration</h1>
-      {error && <div className="error">{error}</div>}
-      <form onSubmit={handleSubmit} className="form">
+    <div className="form-container">
+      <h1 className="form-title">Register</h1>
+      {error && <p className="error">{error}</p>}
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Username</label>
           <input
@@ -66,8 +38,7 @@ function RegistrationPage() {
             name="username"
             value={formData.username}
             onChange={handleChange}
-            placeholder="Enter your username"
-            className="input"
+            required
           />
         </div>
         <div className="form-group">
@@ -77,8 +48,7 @@ function RegistrationPage() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            placeholder="Enter your email"
-            className="input"
+            required
           />
         </div>
         <div className="form-group">
@@ -88,8 +58,7 @@ function RegistrationPage() {
             name="password"
             value={formData.password}
             onChange={handleChange}
-            placeholder="Enter your password"
-            className="input"
+            required
           />
         </div>
         <div className="form-group">
@@ -98,7 +67,6 @@ function RegistrationPage() {
             name="role"
             value={formData.role}
             onChange={handleChange}
-            className="select"
           >
             <option value="user">User</option>
             <option value="admin">Admin</option>

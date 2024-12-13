@@ -1,39 +1,39 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { loginUser } from '../services/API';
+import { useAppContext } from '../AppContext';
 
 function LoginPage() {
-  const [formData, setFormData] = useState({ username: "", password: "" });
+  const [credentials, setCredentials] = useState({ username: '', password: '' });
+  const { dispatch } = useAppContext();
   const navigate = useNavigate();
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-
-    if (formData.username && formData.password) {
-      console.log("Logged in as:", formData.username);
-      navigate("/");
-    } else {
-      alert("Please fill in all fields");
+    try {
+      const data = await loginUser(credentials);
+      localStorage.setItem('authToken', data.token);
+      dispatch({ type: 'SET_USER', payload: data.user });
+      alert('Login successful!');
+      navigate('/');
+    } catch (error) {
+      console.error('Login failed:', error);
+      alert('Invalid username or password');
     }
   };
 
   return (
     <div className="form-container">
-      <h1 className="form-title">Login to Forum</h1>
-      <form onSubmit={handleSubmit}>
+      <h1 className="form-title">Login</h1>
+      <form onSubmit={handleLogin}>
         <div className="form-group">
           <label htmlFor="username">Username</label>
           <input
             type="text"
             id="username"
-            name="username"
-            value={formData.username}
-            onChange={handleInputChange}
-            placeholder="Enter your username"
+            value={credentials.username}
+            onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
+            required
           />
         </div>
         <div className="form-group">
@@ -41,22 +41,15 @@ function LoginPage() {
           <input
             type="password"
             id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleInputChange}
-            placeholder="Enter your password"
+            value={credentials.password}
+            onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
+            required
           />
         </div>
         <button type="submit" className="form-button">
           Login
         </button>
       </form>
-      <p className="text-center">
-        Don't have an account?{" "}
-        <span className="text-link" onClick={() => navigate("/register")}>
-          Register here
-        </span>
-      </p>
     </div>
   );
 }
